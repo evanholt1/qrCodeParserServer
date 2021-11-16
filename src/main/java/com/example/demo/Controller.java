@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/parseQr")
+@RequestMapping("")
 public class Controller {
     private final Service service;
 
@@ -21,9 +21,15 @@ public class Controller {
         return "hello world";
     }
 
-    @PostMapping
-    public ObjectNode parseQr(@RequestBody Map<String,Object> payload) throws JsonProcessingException {
-        String qrCode = (String) payload.get("data");
-        return this.service.parseQr(qrCode);
+    @GetMapping("/parseQr")
+    public ObjectNode parseQr(@RequestParam("data")String qrCodeData) throws JsonProcessingException {
+        //String qrCode = (String) payload.get("data");
+        return this.service.parseQr(qrCodeData);
     }
+
+//    @PostMapping
+//    public ObjectNode parseQr(@RequestBody Map<String,Object> payload) throws JsonProcessingException {
+//        String qrCode = (String) payload.get("data");
+//        return this.service.parseQr(qrCode);
+//    }
 }
